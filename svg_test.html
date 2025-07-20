@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>SVG Morph Test</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding-top: 2rem; }
+        svg { 
+            width: 360px; 
+            height: 480px; 
+            border: 1px solid #ccc; 
+        }
+        button { margin-top: 1rem; padding: 0.5rem 1rem; font-size: 1rem; }
+    </style>
+</head>
+<body>
+    <h1>SVG Morphing Test</h1>
+    <svg id="mouth-svg" viewBox="0 0 360 480">
+        <!-- このパスがアニメーションで変化します -->
+        <path id="mouth-path" fill="none" stroke="#2d0004" stroke-width="1.284" stroke-linecap="square" stroke-linejoin="bevel"></path>
+    </svg>
+    <br>
+    <button id="toggle-button">Toggle Smile / Sad</button>
+
+    <!-- Anime.jsライブラリを読み込み -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+
+    <!-- アプリケーションコード -->
+    <script src="svg_app.js"></script>
+</body>
+</html>

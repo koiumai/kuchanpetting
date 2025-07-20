@@ -1,0 +1,185 @@
+html, body {
+    overflow: hidden;
+    touch-action: none;
+}
+
+body {
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+}
+
+#character-container {
+    position: absolute;
+    left: 50%;
+    bottom: 5vh;
+    width: 60vh;
+    height: 60vh;
+    cursor: pointer;
+    touch-action: none;
+    transform: translateX(-50%);
+}
+
+.character-layer {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease-out; /* 全レイヤー共通の追従アニメーション */
+    user-select: none;
+}
+
+/* --- アニメーション定義 --- */
+@keyframes breathe-body { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-1.5%); } }
+@keyframes breathe-head { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-1.7%); } }
+@keyframes breathe-hair { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-1.9%); } }
+
+/* --- レイヤー基本スタイル --- */
+.inner-breathe, .inner-eyelid, .inner-svg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#char-body, #char-back-hair, #char-horn, #char-mituami, #char-base-face, #char-brow-down, #char-brow-up, #char-eyes-actual, #char-front-hair {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.mouth-layer, .eyelid-layer, .brow-layer {
+    width: 100%;
+    height: 100%;
+    top: 65%;
+    pointer-events: none;
+    overflow: visible;
+}
+.mouth-layer { z-index: 8; }
+.brow-layer { z-index: 8; }
+.eyelid-layer { z-index: 9; }
+.mouth-layer path { pointer-events: auto; }
+
+/* --- 各パーツの個別設定 --- */
+#char-body { top: 63.5%; z-index: 2; transform-origin: center top; }
+#char-body .inner-breathe { background-image: url('../assets/images/body.png'); animation: breathe-body 3s ease-in-out infinite alternate; }
+
+#char-back-hair { z-index: 1; }
+#char-back-hair .inner-breathe { background-image: url('../assets/images/back_hair.png'); animation: breathe-hair 3s ease-in-out infinite alternate; }
+
+#char-horn { z-index: 3; }
+#char-horn .inner-breathe { background-image: url('../assets/images/horn.png'); animation: breathe-head 3s ease-in-out infinite alternate; }
+
+#char-mituami { z-index: 4; }
+#char-mituami .inner-breathe { background-image: url('../assets/images/mituami.png'); animation: breathe-head 3s ease-in-out infinite alternate; }
+
+#char-base-face { z-index: 5; }
+#char-base-face .inner-breathe, .mouth-layer .inner-svg, .eyelid-layer .inner-svg, .brow-layer .inner-svg, #char-eyes-actual .inner-breathe { 
+    animation: breathe-head 3s ease-in-out infinite alternate; 
+}
+#char-base-face .inner-breathe { background-image: url('../assets/images/face_base.png'); }
+
+#char-brow-down, #char-brow-up { z-index: 8; }
+#char-brow-down .inner-breathe { background-image: url('../assets/images/down_blow.png'); transition: opacity 0.2s ease-in-out; }
+#char-brow-up .inner-breathe { background-image: url('../assets/images/up_blow.png'); opacity: 0; transition: opacity 0.2s ease-in-out; }
+
+#char-eyes-actual { z-index: 7; }
+#char-eyes-actual .inner-breathe {
+    background-image: url('../assets/images/eyes.png');
+    /* clip-pathはJSで制御 */
+}
+
+#char-front-hair { z-index: 10; }
+#char-front-hair .inner-breathe { background-image: url('../assets/images/front_hair.png'); animation: breathe-hair 3s ease-in-out infinite alternate; }
+
+/* --- 状態変化クラス --- */
+#character-container.is-petting #char-brow-down .inner-breathe { opacity: 0; }
+#character-container.is-petting #char-brow-up .inner-breathe { opacity: 1; }
+
+/* (以下、ゲージやローダーのスタイルは変更なし) */
+#fullness-gauge-container, #petting-gauge-container { position: absolute; top: 50%; transform: translateY(-50%); width: 20px; height: 300px; background-color: #f0f0f0; border-radius: 10px; overflow: hidden; box-shadow: inset 0 1px 3px rgba(0,0,0,0.2); display: flex; flex-direction: column-reverse; align-items: center; }
+#petting-gauge-container { right: 20px; }
+#fullness-gauge-container { right: 50px; }
+#fullness-gauge-fill { width: 100%; background-color: #ffa500; border-radius: 10px; transition: height 0.2s ease-out; }
+#petting-gauge-fill { width: 100%; background-color: #ff69b4; border-radius: 10px; transition: height 0.2s ease-out; }
+#fullness-gauge-icon, #petting-gauge-heart { position: absolute; top: calc(50% + 150px + 10px); transform: translateY(-50%); width: 20px; text-align: center; font-size: 24px; z-index: 10; }
+#petting-gauge-heart { right: 20px; color: #ff69b4; }
+#fullness-gauge-icon { right: 50px; color: #ffa500; }
+#loader { position: fixed; left: 0; top: 0; width: 100%; height: 100%; background-color: #f0f0f0; display: flex; justify-content: center; align-items: center; flex-direction: column; z-index: 9999; transition: opacity 0.5s ease-out; }
+#loader.hidden { opacity: 0; pointer-events: none; }
+.spinner { width: 50px; height: 50px; border: 5px solid #ccc; border-top-color: #ff69b4; border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 20px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+#character-container { opacity: 0; transition: opacity 0.8s ease-in; }
+#character-container.loaded { opacity: 1; }
+#food-icon-placeholder, #food-icon { position: absolute; left: 50px; top: calc(50% + 150px + 10px + 30px); transform: translateX(-50%); width: 48px; height: 48px; border-radius: 8px; }
+#food-icon-placeholder { border: 2px dashed #cccccc; z-index: 999; }
+#food-icon { font-size: 36px; cursor: grab; user-select: none; z-index: 1000; transition: transform 0.3s ease-out, left 0.3s ease-out, top 0.3s ease-out; display: flex; justify-content: center; align-items: center; }
+#food-icon.is-dragging { cursor: grabbing; transition: none; }
+
+/* --- UI Toolbar --- */
+#ui-toolbar {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.menu-button {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.2s ease-out, background-color 0.2s ease-out;
+}
+
+.menu-button:hover {
+    transform: scale(1.1);
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.menu-button img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    pointer-events: none; /* Prevent img from capturing clicks */
+}
+
+#menu-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    transform: translateX(-20px);
+    pointer-events: none;
+}
+
+#ui-toolbar.is-open #menu-options {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+}
+

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>クーちゃんなでなで</title>
+    <script>
+        // Cache-busting for CSS
+        const cssLink = document.createElement('link');
+        cssLink.rel = 'stylesheet';
+        cssLink.href = `css/style.css?_=${new Date().getTime()}`;
+        document.head.appendChild(cssLink);
+    </script>
+</head>
+<body>
+    <div id="loader">
+        <div class="spinner"></div>
+        <p>Now Loading...</p>
+    </div>
+
+    <h1>クーちゃんをなでなでしよう！</h1>
+    <div id="character-container">
+        <div id="char-back-hair" class="character-layer"><div class="inner-breathe"></div></div>
+        <div id="char-horn" class="character-layer"><div class="inner-breathe"></div></div>
+        <div id="char-mituami" class="character-layer"><div class="inner-breathe"></div></div>
+        <div id="char-body" class="character-layer"><div class="inner-breathe"></div></div>
+        <div id="char-base-face" class="character-layer"><div class="inner-breathe"></div></div>
+        <!-- Mouth Layer (SVG) -->
+        <div class="character-layer mouth-layer">
+            <div class="inner-svg"></div>
+        </div>
+        <!-- Brow Layers (SVG) -->
+        <div class="character-layer brow-layer">
+            <div class="inner-svg"></div>
+        </div>
+        <!-- Brow Layers (PNG, disabled) -->
+        <!-- <div id="char-brow-down" class="character-layer"><div class="inner-breathe"></div></div> -->
+        <!-- <div id="char-brow-up" class="character-layer"><div class="inner-breathe"></div></div> -->
+        <div id="char-eyes-actual" class="character-layer"><div class="inner-breathe"></div></div>
+        <div class="character-layer eyelid-layer">
+            <div class="inner-svg"></div>
+        </div>
+        <div id="char-front-hair" class="character-layer"><div class="inner-breathe"></div></div>
+    </div>
+    <p id="status-text">ここにステータスが表示されます</p>
+
+    <!-- Fullness Gauge -->
+    <div id="fullness-gauge-container">
+        <div id="fullness-gauge-fill"></div>
+    </div>
+    <div id="fullness-gauge-icon">🍖</div>
+
+    <div id="petting-gauge-container">
+        <div id="petting-gauge-fill"></div>
+    </div>
+    <div id="petting-gauge-heart">♥</div>
+
+    <!-- UI Toolbar -->
+    <div id="ui-toolbar">
+        <button id="menu-toggle-button" class="menu-button">
+            <img src="assets/icons/menu.svg" alt="Menu">
+        </button>
+        <div id="menu-options">
+            <button id="btn-smile" class="menu-button" data-expression="smile">
+                <img src="assets/icons/smile.svg" alt="Smile">
+            </button>
+            <button id="btn-sad" class="menu-button" data-expression="sad">
+                <img src="assets/icons/sad.svg" alt="Sad">
+            </button>
+        </div>
+    </div>
+
+    <!-- Food Icon -->
+    <div id="food-icon-placeholder"></div>
+    <div id="food-icon">🍖</div>
+
+    
+
+    <!-- <button id="debug-blink-button">Blink Test</button> -->
+
+    <!-- Anime.js for SVG Morphing -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script type="module" src="js/main_app.js"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created using Krita: https://krita.org -->
+
+<svg
+   width="360pt"
+   height="480pt"
+   viewBox="0 0 360 480"
+   version="1.1"
+   id="svg1"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <path
+     id="shape0"
+     transform="matrix(-1,0,0,1,198.9,328.62)"
+     fill="none"
+     stroke="#2d0004"
+     stroke-width="1.284"
+     stroke-linecap="square"
+     stroke-linejoin="bevel"
+     d="M 37.8,0 C 30.5526,4.81442 26.0906,4.93887 18.9,5.22 11.7094,4.93887 7.2474,4.81442 0,0" />
+</svg>
