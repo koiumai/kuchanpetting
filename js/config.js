@@ -8,6 +8,11 @@ export const characterConfig = {
         moveRatio: { x: 0.035, y: 0.035 },
         interactive: true,
     },
+    clothes: {
+        element: document.getElementById('char-clothes'),
+        moveRatio: { x: 0.035, y: 0.035 },
+        interactive: true,
+    },
     backHair: {
         element: document.getElementById('char-back-hair'),
         moveRatio: { x: 0.05, y: 0.075 },

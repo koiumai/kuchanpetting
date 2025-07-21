@@ -21,7 +21,7 @@ const state = {
 
 // --- アセットのパス ---
 const IMAGE_PATHS = [
-    'assets/images/body.png', 'assets/images/back_hair.png', 'assets/images/horn.png', 'assets/images/mituami.png', 'assets/images/face_base.png',
+    'assets/images/body.png', 'assets/images/clothes.png', 'assets/images/back_hair.png', 'assets/images/horn.png', 'assets/images/mituami.png', 'assets/images/face_base.png',
     /* '../down_blow.png', '../up_blow.png', */ // これらはSVGに置き換えられる可能性
     'assets/images/eyes.png', 'assets/images/front_hair.png'
 ];

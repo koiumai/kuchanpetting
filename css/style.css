@@ -49,7 +49,7 @@ body {
     background-position: center;
 }
 
-#char-body, #char-back-hair, #char-horn, #char-mituami, #char-base-face, #char-brow-down, #char-brow-up, #char-eyes-actual, #char-front-hair {
+#char-body, #char-clothes, #char-back-hair, #char-horn, #char-mituami, #char-base-face, #char-brow-down, #char-brow-up, #char-eyes-actual, #char-front-hair {
     width: 100%;
     height: 100%;
     position: absolute;
@@ -65,41 +65,44 @@ body {
     pointer-events: none;
     overflow: visible;
 }
-.mouth-layer { z-index: 8; }
-.brow-layer { z-index: 8; }
-.eyelid-layer { z-index: 9; }
+.mouth-layer { z-index: 9; }
+.brow-layer { z-index: 9; }
+.eyelid-layer { z-index: 10; }
 .mouth-layer path { pointer-events: auto; }
 
 /* --- 各パーツの個別設定 --- */
 #char-body { top: 63.5%; z-index: 2; transform-origin: center top; }
 #char-body .inner-breathe { background-image: url('../assets/images/body.png'); animation: breathe-body 3s ease-in-out infinite alternate; }
 
+#char-clothes { top: 63.5%; z-index: 3; transform-origin: center top; }
+#char-clothes .inner-breathe { background-image: url('../assets/images/clothes.png'); animation: breathe-body 3s ease-in-out infinite alternate; }
+
 #char-back-hair { z-index: 1; }
 #char-back-hair .inner-breathe { background-image: url('../assets/images/back_hair.png'); animation: breathe-hair 3s ease-in-out infinite alternate; }
 
-#char-horn { z-index: 3; }
+#char-horn { z-index: 5; }
 #char-horn .inner-breathe { background-image: url('../assets/images/horn.png'); animation: breathe-head 3s ease-in-out infinite alternate; }
 
-#char-mituami { z-index: 4; }
+#char-mituami { z-index: 6; }
 #char-mituami .inner-breathe { background-image: url('../assets/images/mituami.png'); animation: breathe-head 3s ease-in-out infinite alternate; }
 
-#char-base-face { z-index: 5; }
+#char-base-face { z-index: 7; }
 #char-base-face .inner-breathe, .mouth-layer .inner-svg, .eyelid-layer .inner-svg, .brow-layer .inner-svg, #char-eyes-actual .inner-breathe { 
     animation: breathe-head 3s ease-in-out infinite alternate; 
 }
 #char-base-face .inner-breathe { background-image: url('../assets/images/face_base.png'); }
 
-#char-brow-down, #char-brow-up { z-index: 8; }
+#char-brow-down, #char-brow-up { z-index: 10; }
 #char-brow-down .inner-breathe { background-image: url('../assets/images/down_blow.png'); transition: opacity 0.2s ease-in-out; }
 #char-brow-up .inner-breathe { background-image: url('../assets/images/up_blow.png'); opacity: 0; transition: opacity 0.2s ease-in-out; }
 
-#char-eyes-actual { z-index: 7; }
+#char-eyes-actual { z-index: 9; }
 #char-eyes-actual .inner-breathe {
     background-image: url('../assets/images/eyes.png');
     /* clip-pathはJSで制御 */
 }
 
-#char-front-hair { z-index: 10; }
+#char-front-hair { z-index: 12; }
 #char-front-hair .inner-breathe { background-image: url('../assets/images/front_hair.png'); animation: breathe-hair 3s ease-in-out infinite alternate; }
 
 /* --- 状態変化クラス --- */
