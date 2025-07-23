@@ -1,8 +1,0 @@
-feat: Add clothes layer to character
-
-Adds the `clothes.png` image as a new layer on top of the character's body.
-
-- Adds a new `div` to `index.html` for the clothes layer.
-- Updates `config.js` and `main_app.js` to handle the new layer.
-- Adjusts `z-index` values in `style.css` to ensure correct layer order.
-- The new layer shares the same position and animations as the body layer.
