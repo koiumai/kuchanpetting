@@ -1,7 +1,7 @@
 // --- UI関連のロジック (SVG版) ---
 // このファイルは、ユーザーの操作に直接反応する処理をすべて集約します。
 
-import { characterConfig, GAUGE_MAX, GAUGE_INCREASE_RATE, GAUGE_DECREASE_RATE, ANIMATION_DURATION } from './config.js';
+import { characterConfig, GAUGE_MAX, GAUGE_INCREASE_RATE, GAUGE_DECREASE_RATE, ANIMATION_DURATION, movementConfig } from './config.js';
 
 // アプリケーションの状態を管理するオブジェクト
 let state = {};
@@ -183,6 +183,10 @@ function handleMove(clientX, clientY, target) {
     const rect = uiElements.container.getBoundingClientRect();
     mouseOffsetX = clientX - (rect.left + rect.width / 2) - touchStartOffsetX;
     mouseOffsetY = clientY - (rect.top + rect.height / 2) - touchStartOffsetY;
+
+    // 移動範囲の制限
+    mouseOffsetX = Math.max(-movementConfig.maxMove.x, Math.min(movementConfig.maxMove.x, mouseOffsetX));
+    mouseOffsetY = Math.max(-movementConfig.maxMove.y, Math.min(movementConfig.maxMove.y, mouseOffsetY));
 
     if (!state.isPetting) {
         state.isPetting = true;

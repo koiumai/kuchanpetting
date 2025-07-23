@@ -16,7 +16,7 @@ const state = {
     animationFrameId: null,
     isBlinking: false,
     blinkTimeoutId: null,
-    currentExpression: 'sad', // 初期表情
+    currentExpression: 'smile', // 初期表情
 };
 
 // --- アセットのパス ---

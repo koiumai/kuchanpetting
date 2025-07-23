@@ -35,9 +35,9 @@ body {
 }
 
 /* --- アニメーション定義 --- */
-@keyframes breathe-body { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-1.5%); } }
-@keyframes breathe-head { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-1.7%); } }
-@keyframes breathe-hair { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-1.9%); } }
+@keyframes breathe-body { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-1%); } }
+@keyframes breathe-head { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-1.1%); } }
+@keyframes breathe-hair { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-1.3%); } }
 
 /* --- レイヤー基本スタイル --- */
 .inner-breathe, .inner-eyelid, .inner-svg {
@@ -66,15 +66,15 @@ body {
     overflow: visible;
 }
 .mouth-layer { z-index: 9; }
-.brow-layer { z-index: 9; }
+.brow-layer { z-index: 13; }
 .eyelid-layer { z-index: 10; }
 .mouth-layer path { pointer-events: auto; }
 
 /* --- 各パーツの個別設定 --- */
-#char-body { top: 63.5%; z-index: 2; transform-origin: center top; }
+#char-body { top: 64%; z-index: 2; transform-origin: center top; }
 #char-body .inner-breathe { background-image: url('../assets/images/body.png'); animation: breathe-body 3s ease-in-out infinite alternate; }
 
-#char-clothes { top: 63.5%; z-index: 3; transform-origin: center top; }
+#char-clothes { top: 64%; z-index: 3; transform-origin: center top; }
 #char-clothes .inner-breathe { background-image: url('../assets/images/clothes.png'); animation: breathe-body 3s ease-in-out infinite alternate; }
 
 #char-back-hair { z-index: 1; }
